@@ -1,11 +1,5 @@
 function wavBytes = conversionWAV(audioData, fs)
-    % conversionWAV --> Lo pasa a PCM de 16 bits.(PCM no comprime, es una
-    % manera de representar el audio digital sin comprimir) Es lo que la
-    % API espera, y es como se construye un WAV. El WAV no entiede de
-    % double. Y Whisper tampoco, espera archivos reales. 
-    % datos reales PCM. 16 bits = 2 bytes. Al hacer la petición HTTP post
-    % se envían de 8 bits en 8 bits, es lo que soporta. 8 bits = 1 byte. [0, 255]
-
+    % conversionWAV --> Lo pasa a PCM de 16 bits.
     if isa(audioData, 'double') || isa(audioData, 'single')
           audioData = int16(max(min(audioData, 1), -1) * 32767); %int 16 pq es el formato WAV en memoria con el que opera matlab  
     else     
