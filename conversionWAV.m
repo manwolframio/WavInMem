@@ -1,11 +1,4 @@
 function wavBytes = conversionWAV(audioData, fs)
-
-    % ¿Está en formato PCM de 16 bits? Es lo que usarn los archivos WAV de
-    % PCM.   
-
-    % Al capturar el audio del micro se captura como muestras PCM de 16 bits [-32768, 32767],
-    % Matlab lo normalizan entre [-1, 1] y lo pasa a double. Es mejor para
-    % procesamiento. 
     % conversionWAV --> Lo pasa a PCM de 16 bits.(PCM no comprime, es una
     % manera de representar el audio digital sin comprimir) Es lo que la
     % API espera, y es como se construye un WAV. El WAV no entiede de
@@ -51,12 +44,3 @@ function wavBytes = conversionWAV(audioData, fs)
 
    wavBytes = [cabecera, audioEnBytes'];  % Concatenación cabecera + data de manera binaria en memoria (sin escribirlop en disco, sino en ram)
 end
-
-% Whisper a través de Ffmpeg detecta qué tipo de archivo y qué parámetros tiene a partir de la
-% cabecera WAV. Sin cabecera no sabría qué frecuencia (fs) tiene el audio,
-% cuántos canales o cómo son las muestras PCM, etc..
-
-% FFmpeg es un programa que lee, convierte, procesa audio y vídeo a casi
-% cualquier formato. Puede escribir y leer entre wav, mp3, mp4, mov...
-% Cambiar frecuencia de muestreo, canales, volumen, extraer audio de un
-% vídeo, cortar, unir. Al usar WHISPER, FFmpeg está integrado ya.
